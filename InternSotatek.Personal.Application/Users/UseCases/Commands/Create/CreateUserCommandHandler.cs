@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using FluentValidation;
+using InternSotatek.Personal.Domain.Entities;
+using InternSotatek.Personal.Infrastructure;
+using MediatR;
+
+namespace InternSotatek.Personal.Application.Users.UseCases.Commands.Create
+{
+	public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, CreateUserResponse>
+	{
+		private readonly PersonalDbContext _dbContext;
+		private readonly IValidator<CreateUserCommand> _validator;
+
+		private const int SaltSize = 16;
+		private const int HashSize = 32;
+		private const int Interations = 10000;
+		private readonly HashAlgorithmName Algorithm = HashAlgorithmName.SHA512;
+
+		public CreateUserCommandHandler(
+			PersonalDbContext dbContext
+			, IValidator<CreateUserCommand> validator
+		)
+		{
+			_dbContext = dbContext;
+			_validator = validator;
+		}
+
+		public async Task<CreateUserResponse> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+		{
+			var checkValid = _validator.Validate(request);
+			if (!checkValid.IsValid)
+			{
+				throw new FluentValidation.ValidationException(checkValid.Errors);
+			}
+
+			Guid id = Guid.NewGuid();
+			DateTime createdTime = DateTime.UtcNow;
+			// Hash password SHA512
+			byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);
+			byte[] hash = Rfc2898DeriveBytes.Pbkdf2(request.Password, salt, Interations, Algorithm, HashSize);
+			string passwordHashed = $"{Convert.ToHexString(hash)}-{Convert.ToHexString(salt)}";
+
+			var newUser = new User
+			{
+				Id = id,
+				Username = request.Username,
+				PasswordHashed = passwordHashed,
+				Firstname = request.Firstname,
+				Lastname = request.Lastname,
+				Email = request.Email,
+				PhoneNumber = request.PhoneNumber,
+				Dob = request.Dob,
+				CreatedTime = createdTime,
+			};
+
+			await _dbContext.Users.AddAsync(newUser, cancellationToken);
+			await _dbContext.SaveChangesAsync(cancellationToken);
+
+			return new CreateUserResponse { Code = 200 };
+		}
+	}
+}
