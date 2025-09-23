@@ -5,18 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace InternSotatek.Personal.Application.Users.UseCases.Commands.Create
+namespace InternSotatek.Personal.Application.Users.UseCases.Commands.Update
 {
-	public class CreateUserCommand : IRequest<CreateUserResponse>
+	public class UpdateUserCommand : IRequest<UpdateUserResponse>
 	{
+		public Guid Id { get; set; }
 		public string Username { get; set; }
-		public string Password { get; set; }
+		//public string PasswordHashed { get; set; }
 		public string? Firstname { get; set; }
 		public string? Lastname { get; set; }
 		public string Email { get; set; }
 		public string PhoneNumber { get; set; }
+		//public bool IsActive { get; set; } = true;
 		public DateOnly? Dob { get; set; }
+		//public DateTime? UpdatedTime { get; set; }
 	}
 }

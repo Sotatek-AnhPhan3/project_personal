@@ -11,6 +11,6 @@ namespace InternSotatek.Personal.Infrastructure
 	public class PersonalDbContext(DbContextOptions<PersonalDbContext> options) : DbContext(options)
 	{
 		public DbSet<User> Users { get; set; }
-
+		public DbSet<Role> Roles { get; set; }
 	}
 }

@@ -10,6 +10,7 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Queries.GetUsersList
 	public class GetUsersListQuery : PagedAndSortedResultQueryDto, IRequest<GetUsersListResponse>
 	{
 		public string? Search { get; set; }
+		public bool IsActive { get; set; } = true;
 
 	}
 
@@ -17,7 +18,7 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Queries.GetUsersList
 	{
 		public int PageIndex { get; set; } = 1;
 		public int PageSize { get; set; } = 10;
-		public string Sorting { get; set; } = "ASC";
-		public string SortBy { get; set; } = "Username";
+		public string Sorting { get; set; } = "DESC";
+		public string SortBy { get; set; } = "CreatedTime";
 	}
 }

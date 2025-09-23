@@ -1,5 +1,9 @@
 ﻿using FluentValidation;
 using InternSotatek.Personal.Application.Users.UseCases.Commands.Create;
+using InternSotatek.Personal.Application.Users.UseCases.Commands.Delete;
+using InternSotatek.Personal.Application.Users.UseCases.Commands.SortDelete;
+using InternSotatek.Personal.Application.Users.UseCases.Commands.Update;
+using InternSotatek.Personal.Application.Users.UseCases.Queries.GetUserById;
 using InternSotatek.Personal.Application.Users.UseCases.Queries.GetUsersList;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +30,38 @@ namespace InternSotatek.Personal.Api.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetAllUsers([FromQuery] GetUsersListQuery query)
 		{
+			var reponse = await _mediator.Send(query);
+			return Ok(reponse);
+		}
+
+		[HttpGet("{id}")]
+		public async Task<IActionResult> GetUserById([FromRoute] Guid id)
+		{
+			var query = new GetUserByIdQuery { Id = id };
+			var reponse = await _mediator.Send(query);
+			return Ok(reponse);
+		}
+
+		[HttpPut("{id}")]
+		public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command, [FromRoute] Guid id)
+		{
+			command.Id = id;
+			var reponse = await _mediator.Send(command);
+			return Ok(reponse);
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> DeleteUser([FromRoute] Guid id)
+		{
+			var query = new DeleteUserCommand { Id = id };
+			var reponse = await _mediator.Send(query);
+			return Ok(reponse);
+		}
+
+		[HttpPatch("{id}")]
+		public async Task<IActionResult> SortDeleteUser([FromRoute] Guid id)
+		{
+			var query = new SortDeleteUserCommand { Id = id };
 			var reponse = await _mediator.Send(query);
 			return Ok(reponse);
 		}

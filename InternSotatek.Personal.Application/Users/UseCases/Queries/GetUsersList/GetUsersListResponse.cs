@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InternSotatek.Personal.Application.Users.UseCases.Queries.GetUsersList
 {
@@ -26,7 +27,7 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Queries.GetUsersList
 		public string Email { get; set; }
 		public string PhoneNumber { get; set; }
 		public bool IsActive { get; set; } = true;
-		public DateTime? Dob { get; set; }
+		public DateOnly? Dob { get; set; }
 		public DateTime CreatedTime { get; set; }
 		public DateTime? UpdatedTime { get; set; }
 	}

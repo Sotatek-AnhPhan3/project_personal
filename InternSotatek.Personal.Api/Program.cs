@@ -3,6 +3,9 @@ using InternSotatek.Personal.Application.Users.UseCases.Commands.Create;
 using InternSotatek.Personal.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
+using InternSotatek.Personal.Application.Users.UseCases.Commands.Update;
+using InternSotatek.Personal.Application;
+//using InternSotatek.Personal.Application.Users.UseCases.Queries.GetUserById;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +28,11 @@ builder.Services.AddMediatR(cfg =>
 		cfg.RegisterServicesFromAssembly(typeof(CreateUserCommandHandler).Assembly)
 );
 builder.Services.AddValidatorsFromAssemblyContaining<CreateUserValidator>();
+
+builder.Services.AddMediatR(cfg =>
+		cfg.RegisterServicesFromAssembly(typeof(UpdateUserCommandHandler).Assembly)
+);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

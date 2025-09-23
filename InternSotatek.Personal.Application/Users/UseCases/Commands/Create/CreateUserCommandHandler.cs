@@ -9,6 +9,7 @@ using FluentValidation;
 using InternSotatek.Personal.Domain.Entities;
 using InternSotatek.Personal.Infrastructure;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace InternSotatek.Personal.Application.Users.UseCases.Commands.Create
 {
@@ -39,6 +40,16 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Commands.Create
 				throw new FluentValidation.ValidationException(checkValid.Errors);
 			}
 
+			var existingUserByUsername = await _dbContext.Users.FirstOrDefaultAsync(x => x.Username == request.Username, cancellationToken);
+			if (existingUserByUsername != null)
+			{
+				return new CreateUserResponse
+				{
+					Code = 409,
+					Message = "Username already exists"
+				};
+			}
+
 			Guid id = Guid.NewGuid();
 			DateTime createdTime = DateTime.UtcNow;
 			// Hash password SHA512
@@ -64,5 +75,8 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Commands.Create
 
 			return new CreateUserResponse { Code = 200 };
 		}
+
+
+
 	}
 }

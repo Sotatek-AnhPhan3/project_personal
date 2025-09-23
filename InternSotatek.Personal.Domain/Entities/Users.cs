@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InternSotatek.Personal.Domain.Entities
 {
@@ -24,7 +25,7 @@ namespace InternSotatek.Personal.Domain.Entities
 		[Required]
 		public string PhoneNumber { get; set; }
 		public bool IsActive { get; set; } = true;
-		public DateTime? Dob {  get; set; }
+		public DateOnly? Dob {  get; set; }
 		public DateTime CreatedTime { get; set; }
 		public DateTime? UpdatedTime { get; set; }
 	}

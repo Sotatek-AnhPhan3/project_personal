@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InternSotatek.Personal.Application.Users.UseCases.Queries.GetUsersList
 {
-	public class GetUsersListQueryHandle : IRequestHandler<GetUsersListQuery, GetUsersListResponse>
+	public class GetUsersListQueryHandler : IRequestHandler<GetUsersListQuery, GetUsersListResponse>
 	{
 		private readonly PersonalDbContext _dbContext;
-		public GetUsersListQueryHandle(PersonalDbContext dbContext)
+		public GetUsersListQueryHandler(PersonalDbContext dbContext)
 		{
 			_dbContext = dbContext;
 		}
@@ -33,6 +33,26 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Queries.GetUsersList
 				}
 			}
 
+			if (!string.IsNullOrEmpty(request.Search))
+			{
+				allUsers = allUsers.Where(u =>
+					u.Username.ToLower().Contains(request.Search.ToLower()) ||
+					u.Email.ToLower().Contains(request.Search.ToLower()) ||
+					u.PhoneNumber.ToLower().Contains(request.Search.ToLower()) ||
+					u.Firstname != null && u.Firstname.ToLower().Contains(request.Search.ToLower()) ||
+					u.Lastname != null && u.Lastname.ToLower().Contains(request.Search.ToLower())
+				);
+			}
+
+			if (request.IsActive)
+			{
+				allUsers = allUsers.Where(u => u.IsActive);
+			}
+			else
+			{
+				allUsers = allUsers.Where(u => !u.IsActive);
+			}
+
 			int totalCount = allUsers.Count();
 			var items = await allUsers
 				.Skip((request.PageIndex - 1) * request.PageSize)
@@ -50,10 +70,11 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Queries.GetUsersList
 					CreatedTime = u.CreatedTime,
 					UpdatedTime = u.UpdatedTime
 				}).ToListAsync();
-			return new GetUsersListResponse { 
-				TotalCount = totalCount, 
-				Items = items, 
-				PageIndex = request.PageIndex, 
+			return new GetUsersListResponse
+			{
+				TotalCount = totalCount,
+				Items = items,
+				PageIndex = request.PageIndex,
 				PageSize = request.PageSize,
 				SortBy = request.SortBy,
 				Sorting = request.Sorting,
