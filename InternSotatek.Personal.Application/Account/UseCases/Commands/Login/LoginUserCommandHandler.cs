@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using InternSotatek.Personal.Application.Utils;
 using InternSotatek.Personal.Domain.Entities;
 using InternSotatek.Personal.Infrastructure;
+using InternSotatek.Personal.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,7 +16,7 @@ namespace InternSotatek.Personal.Application.Account.UseCases.Commands.Login
 {
 	public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, LoginUserResponse>
 	{
-		private readonly PersonalDbContext _dbContext;
+		private readonly IRepository<User, Guid> _userRepository;
 		private readonly IConfiguration _configuration;
 
 		private const int SaltSize = 16;
@@ -23,17 +24,17 @@ namespace InternSotatek.Personal.Application.Account.UseCases.Commands.Login
 		private const int Iterations = 10000;
 		private readonly HashAlgorithmName Algorithm = HashAlgorithmName.SHA512;
 		public LoginUserCommandHandler(
-			PersonalDbContext dbContext
-			, IConfiguration configuration
+            IRepository<User, Guid> userRepository
+            , IConfiguration configuration
 		)
 		{
-			_dbContext = dbContext;
+			_userRepository = userRepository;
 			_configuration = configuration;
 		}
 
 		public async Task<LoginUserResponse> Handle(LoginUserCommand query, CancellationToken cancellationToken)
 		{
-			var existingUserByUsername = await _dbContext.Users.FirstOrDefaultAsync(x => x.Username == query.Username, cancellationToken);
+			var existingUserByUsername = await _userRepository.FirstOrDefaultAsync(x => x.Username == query.Username, cancellationToken);
 			if (existingUserByUsername == null)
 			{
 				return new LoginUserResponse
