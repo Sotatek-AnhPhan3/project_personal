@@ -1,0 +1,72 @@
+2025-09-24 11:41:30.783 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-24 11:41:30.765 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/index.html - null null
+2025-09-24 11:41:30.839 +07:00 [INF] Hosting environment: Development
+2025-09-24 11:41:30.840 +07:00 [INF] Content root path: E:\Sotatek\github\project_personal\InternSotatek.Personal.Api
+2025-09-24 11:41:30.993 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-24 11:41:30.995 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_vs/browserLink - null null
+2025-09-24 11:41:30.990 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/index.html - 200 null text/html;charset=utf-8 229.5289ms
+2025-09-24 11:41:30.998 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - 200 13804 application/javascript; charset=utf-8 4.0871ms
+2025-09-24 11:41:31.036 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_vs/browserLink - 200 null text/javascript; charset=UTF-8 40.4382ms
+2025-09-24 11:41:31.218 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - null null
+2025-09-24 11:41:31.232 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 13.5164ms
+2025-09-24 11:41:35.538 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/api/v1/Users - null null
+2025-09-24 11:41:35.550 +07:00 [INF] Executing endpoint 'InternSotatek.Personal.Api.Controllers.UsersController.GetAllUsers (InternSotatek.Personal.Api)'
+2025-09-24 11:41:35.570 +07:00 [INF] Route matched with {action = "GetAllUsers", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllUsers(InternSotatek.Personal.Application.Usecases.Users.Queries.GetUsersList.GetUsersListQuery) on controller InternSotatek.Personal.Api.Controllers.UsersController (InternSotatek.Personal.Api).
+2025-09-24 11:41:35.574 +07:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-09-24 11:41:35.601 +07:00 [INF] Handling request "104990c6-1e3f-4661-a913-4ead891be48a": {"Search":null,"IsActive":true,"PageIndex":1,"PageSize":10,"Sorting":"DESC","SortBy":"CreatedTime"}
+2025-09-24 11:41:37.443 +07:00 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Users" AS u
+WHERE u."IsActive"
+2025-09-24 11:41:37.533 +07:00 [INF] Executed DbCommand (14ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Username", u."Firstname", u."Lastname", u."Email", u."PhoneNumber", u."IsActive", u."Dob", u."CreatedTime", u."UpdatedTime"
+FROM "Users" AS u
+WHERE u."IsActive"
+ORDER BY u."CreatedTime" DESC
+LIMIT @__p_1 OFFSET @__p_0
+2025-09-24 11:41:37.574 +07:00 [INF] Response for "104990c6-1e3f-4661-a913-4ead891be48a": {"TotalCount":7,"TotalPages":1,"Items":[{"Id":"592dc6bf-9631-457d-8ab8-a31ed02f50a3","Username":"vanlinh","Firstname":"Van","Lastname":"Linh","Email":"vanlinh@gmail.com","PhoneNumber":"0949515485","IsActive":true,"Dob":"2025-09-24","CreatedTime":"2025-09-24T03:16:00.29926Z","UpdatedTime":null},{"Id":"790061ad-95c3-4de5-8fa0-d3b331468478","Username":"quanhien","Firstname":"Quan","Lastname":"Hien","Email":"quanhien@gmail.com","PhoneNumber":"0949290962","IsActive":true,"Dob":"2004-12-16","CreatedTime":"2025-09-23T07:57:12.182987Z","UpdatedTime":null},{"Id":"139251ad-c044-424c-80ae-338b35625c31","Username":"huongtra","Firstname":"Tra","Lastname":"Huong","Email":"huongtra@gmail.com","PhoneNumber":"0949290962","IsActive":true,"Dob":"2004-12-16","CreatedTime":"2025-09-23T07:57:07.60003Z","UpdatedTime":null},{"Id":"07bff395-1245-40d0-8e6a-8d811a9962ad","Username":"phanquan","Firstname":"Quan","Lastname":"Phan","Email":"phanquan@gmail.com","PhoneNumber":"0949290962","IsActive":true,"Dob":"2004-12-16","CreatedTime":"2025-09-23T07:57:04.033717Z","UpdatedTime":null},{"Id":"e955909e-c418-4467-b368-c8a30fbb8dc7","Username":"daohien","Firstname":"Hien","Lastname":"Dao","Email":"daohien@gmail.com","PhoneNumber":"0949290962","IsActive":true,"Dob":"2004-12-16","CreatedTime":"2025-09-23T07:56:58.294573Z","UpdatedTime":null},{"Id":"17195b93-998c-44e8-b72d-6256290791fe","Username":"phananh","Firstname":"Anh","Lastname":"Phan","Email":"phananh@gmail.com","PhoneNumber":"0949290962","IsActive":true,"Dob":"2004-12-16","CreatedTime":"2025-09-23T07:56:51.716195Z","UpdatedTime":null},{"Id":"2fa662c3-c4ff-45f9-a633-92bfe3a7f2ee","Username":"duyanh","Firstname":"Anh","Lastname":"Phan","Email":"aphan1304@gmail.com","PhoneNumber":"0949290962","IsActive":true,"Dob":"2004-12-16","CreatedTime":"2025-09-23T07:53:05.69475Z","UpdatedTime":null}],"PageIndex":1,"PageSize":10,"Sorting":"DESC","SortBy":"CreatedTime"}
+2025-09-24 11:41:37.581 +07:00 [INF] Executing OkObjectResult, writing value of type 'InternSotatek.Personal.Application.Usecases.Users.Queries.GetUsersList.GetUsersListResponse'.
+2025-09-24 11:41:37.598 +07:00 [INF] Executed action InternSotatek.Personal.Api.Controllers.UsersController.GetAllUsers (InternSotatek.Personal.Api) in 2024.4058ms
+2025-09-24 11:41:37.599 +07:00 [INF] Executed endpoint 'InternSotatek.Personal.Api.Controllers.UsersController.GetAllUsers (InternSotatek.Personal.Api)'
+2025-09-24 11:41:37.609 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/api/v1/Users - 200 null application/json; charset=utf-8 2070.3575ms
+2025-09-24 11:43:17.151 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/index.html - null null
+2025-09-24 11:43:17.187 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-24 11:43:17.211 +07:00 [INF] Hosting environment: Development
+2025-09-24 11:43:17.212 +07:00 [INF] Content root path: E:\Sotatek\github\project_personal\InternSotatek.Personal.Api
+2025-09-24 11:43:17.390 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_vs/browserLink - null null
+2025-09-24 11:43:17.390 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-24 11:43:17.389 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/index.html - 200 null text/html;charset=utf-8 242.0475ms
+2025-09-24 11:43:17.394 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - 200 13804 application/javascript; charset=utf-8 3.3875ms
+2025-09-24 11:43:17.421 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_vs/browserLink - 200 null text/javascript; charset=UTF-8 30.8211ms
+2025-09-24 11:43:17.468 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - null null
+2025-09-24 11:43:17.484 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 15.4413ms
+2025-09-24 11:43:25.450 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/index.html - null null
+2025-09-24 11:43:25.470 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-24 11:43:25.488 +07:00 [INF] Hosting environment: Development
+2025-09-24 11:43:25.489 +07:00 [INF] Content root path: E:\Sotatek\github\project_personal\InternSotatek.Personal.Api
+2025-09-24 11:43:25.645 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_vs/browserLink - null null
+2025-09-24 11:43:25.645 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-24 11:43:25.650 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - 200 13804 application/javascript; charset=utf-8 3.5868ms
+2025-09-24 11:43:25.640 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/index.html - 200 null text/html;charset=utf-8 193.176ms
+2025-09-24 11:43:25.676 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_vs/browserLink - 200 null text/javascript; charset=UTF-8 31.0782ms
+2025-09-24 11:43:25.710 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - null null
+2025-09-24 11:43:25.720 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 10.1135ms
+2025-09-24 11:46:32.317 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/index.html - null null
+2025-09-24 11:46:32.329 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/index.html - 200 null text/html;charset=utf-8 12.0841ms
+2025-09-24 11:46:32.344 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-24 11:46:32.344 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_vs/browserLink - null null
+2025-09-24 11:46:32.345 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - 200 13804 application/javascript; charset=utf-8 0.8495ms
+2025-09-24 11:46:32.358 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_vs/browserLink - 200 null text/javascript; charset=UTF-8 13.4094ms
+2025-09-24 11:46:32.415 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - null null
+2025-09-24 11:46:32.428 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 12.546ms
+2025-09-24 11:54:18.008 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/index.html - null null
+2025-09-24 11:54:18.040 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-24 11:54:18.049 +07:00 [INF] Hosting environment: Development
+2025-09-24 11:54:18.049 +07:00 [INF] Content root path: E:\Sotatek\github\project_personal\InternSotatek.Personal.Api
+2025-09-24 11:54:18.222 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_vs/browserLink - null null
+2025-09-24 11:54:18.224 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-24 11:54:18.228 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - 200 13804 application/javascript; charset=utf-8 2.8231ms
+2025-09-24 11:54:18.220 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/index.html - 200 null text/html;charset=utf-8 215.1583ms
+2025-09-24 11:54:18.252 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_vs/browserLink - 200 null text/javascript; charset=UTF-8 30.2641ms
+2025-09-24 11:54:18.432 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - null null
+2025-09-24 11:54:18.446 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 13.8361ms

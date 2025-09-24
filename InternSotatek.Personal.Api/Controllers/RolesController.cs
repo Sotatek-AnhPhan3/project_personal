@@ -1,11 +1,11 @@
-﻿using InternSotatek.Personal.Application.Roles.Usecases.Commands.CreateRole;
+﻿using InternSotatek.Personal.Application.Usecases.Roles.Commands.CreateRole;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InternSotatek.Personal.Api.Controllers
 {
-	[Route("api/[controller]")]
+    [Route("api/[controller]")]
 	[ApiController]
 	public class RolesController : ControllerBase
 	{

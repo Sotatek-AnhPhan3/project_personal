@@ -16,9 +16,4 @@
     <ProjectReference Include="..\InternSotatek.Personal.Infrastructure\InternSotatek.Personal.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Usecases\" />
-    <Folder Include="Roles\Usecases\Queries\" />
-  </ItemGroup>
-
 </Project>

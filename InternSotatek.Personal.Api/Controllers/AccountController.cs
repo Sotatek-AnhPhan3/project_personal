@@ -1,10 +1,10 @@
-﻿using InternSotatek.Personal.Application.Account.UseCases.Commands.Login;
+﻿using InternSotatek.Personal.Application.Usecases.Account.Commands.Login;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InternSotatek.Personal.Api.Controllers
 {
-	[ApiController]
+    [ApiController]
 	[Route("api/v1/[controller]")]
 	public class AccountController : ControllerBase
 	{

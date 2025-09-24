@@ -1,16 +1,16 @@
 ﻿using FluentValidation;
-using InternSotatek.Personal.Application.Users.UseCases.Commands.Create;
-using InternSotatek.Personal.Application.Users.UseCases.Commands.Delete;
-using InternSotatek.Personal.Application.Users.UseCases.Commands.SoftDelete;
-using InternSotatek.Personal.Application.Users.UseCases.Commands.Update;
-using InternSotatek.Personal.Application.Users.UseCases.Queries.GetUserById;
-using InternSotatek.Personal.Application.Users.UseCases.Queries.GetUsersList;
+using InternSotatek.Personal.Application.Usecases.Users.Commands.Delete;
+using InternSotatek.Personal.Application.Usecases.Users.Commands.SoftDelete;
+using InternSotatek.Personal.Application.Usecases.Users.Queries.GetUserById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using InternSotatek.Personal.Application.Usecases.Users.Commands.Create;
+using InternSotatek.Personal.Application.Usecases.Users.Commands.Update;
+using InternSotatek.Personal.Application.Usecases.Users.Queries.GetUsersList;
 
 namespace InternSotatek.Personal.Api.Controllers
 {
-	[ApiController]
+    [ApiController]
 	[Route("api/v1/[controller]")]
 	public class UsersController : ControllerBase
 	{

@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
+using InternSotatek.Personal.Application.Behaviors;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace InternSotatek.Personal.Application
@@ -15,8 +16,11 @@ namespace InternSotatek.Personal.Application
         {
             // Đăng ký MediatR
             services.AddMediatR(cfg =>
-                cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly())
-            );
+            {
+                cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
+                cfg.AddOpenBehavior(typeof(RequestResponseLoggingBehavior<,>));
+                cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            });
 
             // Đăng ký FluentValidation
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
