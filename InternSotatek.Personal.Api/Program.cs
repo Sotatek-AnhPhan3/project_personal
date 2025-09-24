@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 using InternSotatek.Personal.Application.Users.UseCases.Commands.Update;
 using InternSotatek.Personal.Application;
-//using InternSotatek.Personal.Application.Users.UseCases.Queries.GetUserById;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,20 +17,10 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-// connection string
-builder.Services.AddDbContext<PersonalDbContext>(options =>
-{
-	options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultDbContext"));
-});
 
-builder.Services.AddMediatR(cfg =>
-		cfg.RegisterServicesFromAssembly(typeof(CreateUserCommandHandler).Assembly)
-);
-builder.Services.AddValidatorsFromAssemblyContaining<CreateUserValidator>();
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
-builder.Services.AddMediatR(cfg =>
-		cfg.RegisterServicesFromAssembly(typeof(UpdateUserCommandHandler).Assembly)
-);
 
 var app = builder.Build();
 
