@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InternSotatek.Personal.Domain.Entities;
 using InternSotatek.Personal.Infrastructure;
+using InternSotatek.Personal.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,24 +13,22 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Commands.Delete
 {
 	public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, DeleteUserResponse>
 	{
-		private readonly PersonalDbContext _dbContext;
+		private readonly IRepository<User, Guid> _userRepository;
 
-		public DeleteUserCommandHandler(PersonalDbContext dbContext)
+		public DeleteUserCommandHandler(IRepository<User, Guid> userRepository)
 		{
-			_dbContext = dbContext;
+			_userRepository = userRepository;
 		}
 
 		public async Task<DeleteUserResponse> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
 		{
-			var existingUser = await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+			var existingUser = await _userRepository.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 			if (existingUser == null)
 			{
 				throw new KeyNotFoundException("User not found");
 			}
 
-			_dbContext.Users.Remove(existingUser);
-
-			await _dbContext.SaveChangesAsync(cancellationToken);
+			await _userRepository.DeleteAsync(existingUser);
 
 			return new DeleteUserResponse
 			{

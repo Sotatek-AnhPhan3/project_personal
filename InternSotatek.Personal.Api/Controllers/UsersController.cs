@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using InternSotatek.Personal.Application.Users.UseCases.Commands.Create;
 using InternSotatek.Personal.Application.Users.UseCases.Commands.Delete;
-using InternSotatek.Personal.Application.Users.UseCases.Commands.SortDelete;
+using InternSotatek.Personal.Application.Users.UseCases.Commands.SoftDelete;
 using InternSotatek.Personal.Application.Users.UseCases.Commands.Update;
 using InternSotatek.Personal.Application.Users.UseCases.Queries.GetUserById;
 using InternSotatek.Personal.Application.Users.UseCases.Queries.GetUsersList;
@@ -61,7 +61,7 @@ namespace InternSotatek.Personal.Api.Controllers
 		[HttpPatch("{id}")]
 		public async Task<IActionResult> SortDeleteUser([FromRoute] Guid id)
 		{
-			var query = new SortDeleteUserCommand { Id = id };
+			var query = new SoftDeleteUserCommand { Id = id };
 			var reponse = await _mediator.Send(query);
 			return Ok(reponse);
 		}

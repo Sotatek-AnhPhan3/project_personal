@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
+using InternSotatek.Personal.Domain.Entities;
 using InternSotatek.Personal.Infrastructure;
+using InternSotatek.Personal.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,15 +14,15 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Queries.GetUserById
 {
 	public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, GetUserByIdResponse>
 	{
-		private readonly PersonalDbContext _dbContext;
+		private readonly IRepository<User, Guid> _userRepository;
 		private readonly IValidator<GetUserByIdQuery> _validator;
 		
 		public GetUserByIdQueryHandler(
-			PersonalDbContext dbContext
-			, IValidator<GetUserByIdQuery> validator
+             IRepository<User, Guid> userRepository
+            , IValidator<GetUserByIdQuery> validator
 		)
 		{
-			_dbContext = dbContext;
+            _userRepository = userRepository;
 			_validator = validator;
 		}
 
@@ -32,7 +34,7 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Queries.GetUserById
 				throw new FluentValidation.ValidationException(checkValid.Errors);
 			}
 
-			var userById = await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == query.Id, cancellationToken);
+			var userById = await _userRepository.FirstOrDefaultAsync(x => x.Id == query.Id, cancellationToken);
 
 			if (userById == null) {
 				return new GetUserByIdResponse();

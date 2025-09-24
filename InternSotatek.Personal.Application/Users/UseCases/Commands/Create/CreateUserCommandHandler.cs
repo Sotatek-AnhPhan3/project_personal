@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using InternSotatek.Personal.Domain.Entities;
 using InternSotatek.Personal.Infrastructure;
+using InternSotatek.Personal.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,8 +16,8 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Commands.Create
 {
 	public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, CreateUserResponse>
 	{
-		private readonly PersonalDbContext _dbContext;
 		private readonly IValidator<CreateUserCommand> _validator;
+		private readonly IRepository<User, Guid> _userRepository;
 
 		private const int SaltSize = 16;
 		private const int HashSize = 32;
@@ -24,12 +25,12 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Commands.Create
 		private readonly HashAlgorithmName Algorithm = HashAlgorithmName.SHA512;
 
 		public CreateUserCommandHandler(
-			PersonalDbContext dbContext
-			, IValidator<CreateUserCommand> validator
+			IValidator<CreateUserCommand> validator
+			, IRepository<User, Guid> userRepository
 		)
 		{
-			_dbContext = dbContext;
 			_validator = validator;
+			_userRepository = userRepository;
 		}
 
 		public async Task<CreateUserResponse> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -40,7 +41,7 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Commands.Create
 				throw new FluentValidation.ValidationException(checkValid.Errors);
 			}
 
-			var existingUserByUsername = await _dbContext.Users.FirstOrDefaultAsync(x => x.Username == request.Username, cancellationToken);
+			var existingUserByUsername = await _userRepository.FirstOrDefaultAsync(x => x.Username == request.Username, cancellationToken);
 			if (existingUserByUsername != null)
 			{
 				return new CreateUserResponse
@@ -70,8 +71,7 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Commands.Create
 				CreatedTime = createdTime,
 			};
 
-			await _dbContext.Users.AddAsync(newUser, cancellationToken);
-			await _dbContext.SaveChangesAsync(cancellationToken);
+			await _userRepository.AddAsync(newUser, cancellationToken);
 
 			return new CreateUserResponse { Code = 200 };
 		}

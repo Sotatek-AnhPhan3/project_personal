@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InternSotatek.Personal.Domain.Entities;
 using InternSotatek.Personal.Infrastructure;
+using InternSotatek.Personal.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,15 +13,15 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Queries.GetUsersList
 {
 	public class GetUsersListQueryHandler : IRequestHandler<GetUsersListQuery, GetUsersListResponse>
 	{
-		private readonly PersonalDbContext _dbContext;
-		public GetUsersListQueryHandler(PersonalDbContext dbContext)
+		private readonly IRepository<User, Guid> _userRepository;
+		public GetUsersListQueryHandler(IRepository<User, Guid> userRepository)
 		{
-			_dbContext = dbContext;
+            _userRepository = userRepository;
 		}
 
 		public async Task<GetUsersListResponse> Handle(GetUsersListQuery request, CancellationToken cancellationToken)
 		{
-			var allUsers = _dbContext.Users.AsQueryable();
+			var allUsers = _userRepository.GetAll();
 
 			if (!string.IsNullOrEmpty(request.SortBy))
 			{

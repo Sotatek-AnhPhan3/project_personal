@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
+using InternSotatek.Personal.Domain.Entities;
 using InternSotatek.Personal.Infrastructure;
+using InternSotatek.Personal.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,15 +14,15 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Commands.Update
 {
 	public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, UpdateUserResponse>
 	{
-		private readonly PersonalDbContext _dbContext;
+		private readonly IRepository<User, Guid> _userRepository;
 		private readonly IValidator<UpdateUserCommand> _validator;
 
 		public UpdateUserCommandHandler(
-			PersonalDbContext dbContext
-			, IValidator<UpdateUserCommand> validator
+            IRepository<User, Guid> userRepository
+            , IValidator<UpdateUserCommand> validator
 		)
 		{
-			_dbContext = dbContext;
+            _userRepository = userRepository;
 			_validator = validator;
 		}
 
@@ -32,7 +34,7 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Commands.Update
 				throw new FluentValidation.ValidationException(checkValid.Errors);
 			}
 
-			var existingUser = await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+			var existingUser = await _userRepository.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 			if (existingUser == null)
 			{
 				throw new KeyNotFoundException("User not found");
@@ -45,7 +47,7 @@ namespace InternSotatek.Personal.Application.Users.UseCases.Commands.Update
 			existingUser.Dob = request.Dob;
 			existingUser.UpdatedTime = DateTime.UtcNow;
 
-			await _dbContext.SaveChangesAsync(cancellationToken);
+			await _userRepository.UpdateAsync(existingUser);
 
 			return new UpdateUserResponse
 			{
