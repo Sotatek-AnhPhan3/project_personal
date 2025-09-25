@@ -3622,3 +3622,48 @@ LIMIT @__p_1 OFFSET @__p_0
 2025-09-25 16:20:24.092 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_vs/browserLink - 200 null text/javascript; charset=UTF-8 7.1159ms
 2025-09-25 16:20:24.161 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - null null
 2025-09-25 16:20:24.164 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 3.0151ms
+2025-09-25 16:26:40.741 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_vs/browserLink - null null
+2025-09-25 16:26:40.741 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-25 16:26:40.833 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - 200 13804 application/javascript; charset=utf-8 94.5149ms
+2025-09-25 16:26:40.957 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-25 16:26:40.958 +07:00 [INF] Hosting environment: Development
+2025-09-25 16:26:40.958 +07:00 [INF] Content root path: E:\Sotatek\github\project_personal\src\InternSotatek.Personal.Api
+2025-09-25 16:26:41.416 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_vs/browserLink - 200 null text/javascript; charset=UTF-8 679.6887ms
+2025-09-25 16:26:41.462 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - null null
+2025-09-25 16:26:41.506 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 43.5039ms
+2025-09-25 16:28:31.022 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/index.html - null null
+2025-09-25 16:28:31.164 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-25 16:28:31.165 +07:00 [INF] Hosting environment: Development
+2025-09-25 16:28:31.165 +07:00 [INF] Content root path: E:\Sotatek\github\project_personal\src\InternSotatek.Personal.Api
+2025-09-25 16:28:31.223 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-25 16:28:31.223 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_vs/browserLink - null null
+2025-09-25 16:28:31.221 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/index.html - 200 null text/html;charset=utf-8 200.7355ms
+2025-09-25 16:28:31.226 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - 200 13804 application/javascript; charset=utf-8 2.8184ms
+2025-09-25 16:28:31.261 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_vs/browserLink - 200 null text/javascript; charset=UTF-8 38.1481ms
+2025-09-25 16:28:31.334 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - null null
+2025-09-25 16:28:31.359 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 24.8658ms
+2025-09-25 16:28:35.703 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/index.html - null null
+2025-09-25 16:28:35.712 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/index.html - 200 null text/html;charset=utf-8 8.1884ms
+2025-09-25 16:28:35.736 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_vs/browserLink - null null
+2025-09-25 16:28:35.739 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-25 16:28:35.743 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - 200 13804 application/javascript; charset=utf-8 4.2168ms
+2025-09-25 16:28:35.759 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_vs/browserLink - 200 null text/javascript; charset=UTF-8 22.9863ms
+2025-09-25 16:28:35.845 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - null null
+2025-09-25 16:28:35.854 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 9.4154ms
+2025-09-25 16:28:42.509 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/index.html - null null
+2025-09-25 16:28:42.512 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/index.html - 200 null text/html;charset=utf-8 3.1326ms
+2025-09-25 16:28:42.530 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_vs/browserLink - null null
+2025-09-25 16:28:42.530 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-25 16:28:42.531 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - 200 13804 application/javascript; charset=utf-8 1.4792ms
+2025-09-25 16:28:42.538 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_vs/browserLink - 200 null text/javascript; charset=UTF-8 8.6693ms
+2025-09-25 16:28:42.586 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - null null
+2025-09-25 16:28:42.599 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 13.2487ms
+2025-09-25 16:31:30.318 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_vs/browserLink - null null
+2025-09-25 16:31:30.318 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-25 16:31:30.385 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-25 16:31:30.399 +07:00 [INF] Hosting environment: Development
+2025-09-25 16:31:30.399 +07:00 [INF] Content root path: E:\Sotatek\github\project_personal\src\InternSotatek.Personal.Api
+2025-09-25 16:31:30.442 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_framework/aspnetcore-browser-refresh.js - 200 13804 application/javascript; charset=utf-8 128.1941ms
+2025-09-25 16:31:31.227 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/_vs/browserLink - 200 null text/javascript; charset=UTF-8 914.4784ms
+2025-09-25 16:31:31.305 +07:00 [INF] Request starting HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - null null
+2025-09-25 16:31:31.411 +07:00 [INF] Request finished HTTP/2 GET https://localhost:44360/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 106.9034ms
