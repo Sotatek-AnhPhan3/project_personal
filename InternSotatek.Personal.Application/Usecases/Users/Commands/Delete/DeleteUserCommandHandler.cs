@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using InternSotatek.Personal.Domain.Entities;
 using InternSotatek.Personal.Infrastructure;
@@ -22,19 +23,14 @@ namespace InternSotatek.Personal.Application.Usecases.Users.Commands.Delete
 
         public async Task<DeleteUserResponse> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            var existingUser = await _userRepository.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
-            if (existingUser == null)
-            {
-                throw new KeyNotFoundException("User not found");
-            }
-
-            await _userRepository.DeleteAsync(existingUser);
-
+            await _userRepository.DeleteByIdAsync(request.Id);
             return new DeleteUserResponse
             {
                 Code = 200,
                 Message = "OK",
             };
         }
+
+        
     }
 }

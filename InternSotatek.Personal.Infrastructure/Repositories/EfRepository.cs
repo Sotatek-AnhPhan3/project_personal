@@ -92,5 +92,6 @@ namespace InternSotatek.Personal.Infrastructure.Repositories
                 await _dbContext.SaveChangesAsync(cancellationToken);
             }
         }
+
     }
 }

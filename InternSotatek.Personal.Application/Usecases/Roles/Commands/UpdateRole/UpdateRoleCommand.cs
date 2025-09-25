@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace InternSotatek.Personal.Application.Usecases.Roles.Commands.CreateRole;
+namespace InternSotatek.Personal.Application.Usecases.Roles.Commands.UpdateRole;
 
-public class CreateRoleCommand : IRequest<CreateRoleResponse>
+public class UpdateRoleCommand : IRequest<UpdateRoleResponse>
 {
+    public Guid Id { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
 }

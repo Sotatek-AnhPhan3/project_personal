@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InternSotatek.Personal.Application.Usecases.Roles.Commands.CreateRole;
+namespace InternSotatek.Personal.Application.Usecases.Roles.Commands.UpdateRole;
 
-public class CreateRoleResponse
+public class UpdateRoleResponse
 {
     public int Code { get; set; }
     public string Message { get; set; }

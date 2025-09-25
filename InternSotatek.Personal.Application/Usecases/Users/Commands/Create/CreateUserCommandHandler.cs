@@ -35,32 +35,12 @@ namespace InternSotatek.Personal.Application.Usecases.Users.Commands.Create
 
         public async Task<CreateUserResponse> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var checkValid = _validator.Validate(request);
-            if (!checkValid.IsValid)
-            {
-                throw new FluentValidation.ValidationException(checkValid.Errors);
-            }
-
-            var existingUserByUsername = await _userRepository.FirstOrDefaultAsync(x => x.Username == request.Username, cancellationToken);
-            if (existingUserByUsername != null)
-            {
-                return new CreateUserResponse
-                {
-                    Code = 409,
-                    Message = "Username already exists"
-                };
-            }
-
-            Guid id = Guid.NewGuid();
-            DateTime createdTime = DateTime.UtcNow;
-            // Hash password SHA512
-            byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);
-            byte[] hash = Rfc2898DeriveBytes.Pbkdf2(request.Password, salt, Interations, Algorithm, HashSize);
-            string passwordHashed = $"{Convert.ToHexString(hash)}-{Convert.ToHexString(salt)}";
+            // Hash password
+            string passwordHashed = HashPassword(request.Password);
 
             var newUser = new User
             {
-                Id = id,
+                Id = Guid.NewGuid(),
                 Username = request.Username,
                 PasswordHashed = passwordHashed,
                 Firstname = request.Firstname,
@@ -68,7 +48,7 @@ namespace InternSotatek.Personal.Application.Usecases.Users.Commands.Create
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber,
                 Dob = request.Dob,
-                CreatedTime = createdTime,
+                CreatedTime = DateTime.UtcNow,
             };
 
             await _userRepository.AddAsync(newUser, cancellationToken);
@@ -76,7 +56,12 @@ namespace InternSotatek.Personal.Application.Usecases.Users.Commands.Create
             return new CreateUserResponse { Code = 200 };
         }
 
-
-
+        private string HashPassword(string password)
+        {
+            byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);
+            byte[] hash = Rfc2898DeriveBytes.Pbkdf2(password, salt, Interations, Algorithm, HashSize);
+            string passwordHashed = $"{Convert.ToHexString(hash)}-{Convert.ToHexString(salt)}";
+            return passwordHashed;
+        }
     }
 }

@@ -23,19 +23,31 @@ public class SoftDeleteUserCommandHandler : IRequestHandler<SoftDeleteUserComman
 
     public async Task<SoftDeleteUserResponse> Handle(SoftDeleteUserCommand request, CancellationToken cancellationToken)
     {
-        var existingUser = await _userRepository.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
-        if (existingUser == null)
-        {
-            throw new KeyNotFoundException("User not found");
-        }
+        var existingUser = await UserExist(request.Id, cancellationToken);
 
-        existingUser.IsActive = false;
-        await _userRepository.UpdateAsync(existingUser, cancellationToken);
+        await SoftDelete(existingUser, cancellationToken);
+
         return new SoftDeleteUserResponse
         {
             Code = 200,
             Message = "Ok"
         };
+    }
+
+    private async Task<User> UserExist(Guid id, CancellationToken cancellationToken)
+    {
+        var existingUser = await _userRepository.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        if (existingUser == null)
+        {
+            throw new KeyNotFoundException("User doesn't exist");
+        }
+        return existingUser;
+    }
+
+    private async Task SoftDelete(User user, CancellationToken cancellationToken)
+    {
+        user.IsActive = false;
+        await _userRepository.UpdateAsync(user, cancellationToken);
     }
 
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace InternSotatek.Personal.Application.Behaviors;
+namespace InternSotatek.Personal.Application.Common.Behaviors;
 public class RequestResponseLoggingBehavior<TRequest, TResponse>(ILogger<RequestResponseLoggingBehavior<TRequest, TResponse>> logger)
 : IPipelineBehavior<TRequest, TResponse>
 where TRequest : class

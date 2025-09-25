@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
-using InternSotatek.Personal.Application.Behaviors;
+using InternSotatek.Personal.Application.Common.Behaviors;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace InternSotatek.Personal.Application
