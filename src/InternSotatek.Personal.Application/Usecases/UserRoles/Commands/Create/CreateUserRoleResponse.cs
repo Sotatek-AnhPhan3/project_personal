@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InternSotatek.Personal.Application.Usecases.Users.Commands.Create;
+namespace InternSotatek.Personal.Application.Usecases.UserRoles.Commands.Create;
 
-public class CreateUserResponse
+public class CreateUserRoleResponse
 {
     public int Code { get; set; }
     public string Message { get; set; }

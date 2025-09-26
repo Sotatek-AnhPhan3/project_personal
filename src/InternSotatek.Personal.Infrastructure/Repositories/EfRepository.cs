@@ -93,5 +93,18 @@ namespace InternSotatek.Personal.Infrastructure.Repositories
             }
         }
 
+        public async Task DeleteWhereAsync(
+        Expression<Func<TEntity, bool>> predicate,
+        CancellationToken cancellationToken = default)
+        {
+            var entities = await _dbSet.Where(predicate).ToListAsync(cancellationToken);
+
+            if (entities.Any())
+            {
+                _dbSet.RemoveRange(entities);
+                await _dbContext.SaveChangesAsync(cancellationToken);
+            }
+        }
+
     }
 }

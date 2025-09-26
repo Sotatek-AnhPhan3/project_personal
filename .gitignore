@@ -16,8 +16,10 @@ obj/
 .vs/
 .vscode/
 
-# Logs
+# Ignore logs
+src/InternSotatek.Personal.Api/Logs/
 *.log
+*.txt
 
 # NuGet
 *.nupkg

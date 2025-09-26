@@ -21,5 +21,6 @@ namespace InternSotatek.Personal.Infrastructure.Repositories
         Task DeleteAsync(TEntity entity, CancellationToken cancellationToken);
         Task DeleteByIdAsync(TPrimaryKey id);
         Task DeleteByIdAsync(TPrimaryKey id, CancellationToken cancellationToken);
+        Task DeleteWhereAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
     }
 }

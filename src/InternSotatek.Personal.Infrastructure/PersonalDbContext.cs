@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using InternSotatek.Personal.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace InternSotatek.Personal.Infrastructure
+namespace InternSotatek.Personal.Infrastructure;
+
+public class PersonalDbContext(DbContextOptions<PersonalDbContext> options) : DbContext(options)
 {
-	public class PersonalDbContext(DbContextOptions<PersonalDbContext> options) : DbContext(options)
-	{
-		public DbSet<User> Users { get; set; }
-		public DbSet<Role> Roles { get; set; }
-	}
+	public DbSet<User> Users { get; set; }
+	public DbSet<Role> Roles { get; set; }
+	public DbSet<UserRole> UserRoles { get; set; }
 }
