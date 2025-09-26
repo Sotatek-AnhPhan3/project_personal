@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using InternSotatek.Personal.Application.Usecases.Users.Commands.Create;
 using InternSotatek.Personal.Application.Usecases.Users.Commands.Update;
 using InternSotatek.Personal.Application.Usecases.Users.Queries.GetUsersList;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace InternSotatek.Personal.Api.Controllers
 {
@@ -21,21 +22,24 @@ namespace InternSotatek.Personal.Api.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
+        [SwaggerOperation(Summary = "Create new user")]
+        public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
 		{
 			var reponse = await _mediator.Send(command);
 			return Ok(reponse);
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> GetAllUsers([FromQuery] GetUsersListQuery query)
+        [SwaggerOperation(Summary = "Get all users")]
+        public async Task<IActionResult> GetAllUsers([FromQuery] GetUsersListQuery query)
 		{
 			var reponse = await _mediator.Send(query);
 			return Ok(reponse);
 		}
 
 		[HttpGet("{id}")]
-		public async Task<IActionResult> GetUserById([FromRoute] Guid id)
+        [SwaggerOperation(Summary = "Get user by id")]
+        public async Task<IActionResult> GetUserById([FromRoute] Guid id)
 		{
 			var query = new GetUserByIdQuery { Id = id };
 			var reponse = await _mediator.Send(query);
@@ -43,7 +47,8 @@ namespace InternSotatek.Personal.Api.Controllers
 		}
 
 		[HttpPut("{id}")]
-		public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command, [FromRoute] Guid id)
+        [SwaggerOperation(Summary = "Update user")]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command, [FromRoute] Guid id)
 		{
 			command.Id = id;
 			var reponse = await _mediator.Send(command);
@@ -51,7 +56,8 @@ namespace InternSotatek.Personal.Api.Controllers
 		}
 
 		[HttpDelete("{id}")]
-		public async Task<IActionResult> DeleteUser([FromRoute] Guid id)
+        [SwaggerOperation(Summary = "Delete user")]
+        public async Task<IActionResult> DeleteUser([FromRoute] Guid id)
 		{
 			var query = new DeleteUserCommand { Id = id };
 			var reponse = await _mediator.Send(query);
@@ -59,7 +65,9 @@ namespace InternSotatek.Personal.Api.Controllers
 		}
 
 		[HttpPatch("{id}")]
-		public async Task<IActionResult> SortDeleteUser([FromRoute] Guid id)
+        [SwaggerOperation(Summary = "Soft delete user")]
+
+        public async Task<IActionResult> SoftDeleteUser([FromRoute] Guid id)
 		{
 			var query = new SoftDeleteUserCommand { Id = id };
 			var reponse = await _mediator.Send(query);

@@ -14,8 +14,12 @@ namespace InternSotatek.Personal.Domain.Entities
 		[Key]
 		public Guid Id { get; set; }
 		[Required]
+		[MinLength(2)]
+		[MaxLength(200)]
 		public string Name { get; set; }
-		public string? Description { get; set; }
+        [MinLength(2)]
+        [MaxLength(200)]
+        public string? Description { get; set; }
 		public string Slug { get; set; }
 		public DateTime CreatedTime { get; set; }
 		public DateTime? UpdatedTime { get; set; }

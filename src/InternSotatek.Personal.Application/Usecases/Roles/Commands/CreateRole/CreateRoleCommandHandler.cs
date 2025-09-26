@@ -16,14 +16,11 @@ namespace InternSotatek.Personal.Application.Usecases.Roles.Commands.CreateRole;
 public class CreateRoleCommandHandler : IRequestHandler<CreateRoleCommand, CreateRoleResponse>
 {
     private readonly IRepository<Role, Guid> _roleRepository;
-    private readonly IValidator<CreateRoleCommand> _validator;
     public CreateRoleCommandHandler(
         IRepository<Role, Guid> roleRepository
-        , IValidator<CreateRoleCommand> validator
     )
     {
         _roleRepository = roleRepository;
-        _validator = validator;
     }
 
     public async Task<CreateRoleResponse> Handle(CreateRoleCommand request, CancellationToken cancellationToken)

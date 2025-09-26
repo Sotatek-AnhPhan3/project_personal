@@ -15,7 +15,9 @@ namespace InternSotatek.Personal.Domain.Entities
 		[Key]
 		public Guid Id { get; set; }
 		[Required]
-		public string Username { get; set; }
+        [MinLength(2)]
+        [MaxLength(200)]
+        public string Username { get; set; }
 		[Required]
 		public string PasswordHashed { get; set; }
 		public string? Firstname { get; set; }
@@ -23,7 +25,9 @@ namespace InternSotatek.Personal.Domain.Entities
 		[Required]
 		public string Email { get; set; }
 		[Required]
-		public string PhoneNumber { get; set; }
+        [MinLength(9)]
+        [MaxLength(11)]
+        public string PhoneNumber { get; set; }
 		public bool IsActive { get; set; } = true;
 		public DateOnly? Dob {  get; set; }
 		public DateTime CreatedTime { get; set; }

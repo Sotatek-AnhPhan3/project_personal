@@ -1,6 +1,7 @@
 ﻿using InternSotatek.Personal.Application.Usecases.Account.Commands.Login;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace InternSotatek.Personal.Api.Controllers
 {
@@ -14,7 +15,8 @@ namespace InternSotatek.Personal.Api.Controllers
 			_mediator = mediator;
 		}
 		[HttpPost]
-		public async Task<IActionResult> Login([FromBody] LoginUserCommand query)
+        [SwaggerOperation(Summary = "Login")]
+        public async Task<IActionResult> Login([FromBody] LoginUserCommand query)
 		{
 			var response = await _mediator.Send(query);
 			return Ok(response);
