@@ -28,6 +28,9 @@ builder.Services.AddOpenApi();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
+//
+
+
 // logger  
 Log.Logger = new LoggerConfiguration()
    .WriteTo.Console()
@@ -55,6 +58,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseExceptionHandler();
+
+// Middleware
+app.UseMiddleware<ErrorHandling>();
 
 app.UseAuthorization();
 

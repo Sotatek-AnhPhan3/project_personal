@@ -1,4 +1,5 @@
-﻿using InternSotatek.Personal.Application.Usecases.Roles.Commands.CreateRole;
+﻿using InternSotatek.Personal.Application.Common.Dtos;
+using InternSotatek.Personal.Application.Usecases.Roles.Commands.CreateRole;
 using InternSotatek.Personal.Application.Usecases.Roles.Commands.DeleteRole;
 using InternSotatek.Personal.Application.Usecases.Roles.Commands.UpdateRole;
 using InternSotatek.Personal.Application.Usecases.Roles.Queries.GetRolesList;
@@ -27,7 +28,7 @@ namespace InternSotatek.Personal.Api.Controllers
         public async Task<IActionResult> CreateRole(CreateRoleCommand command)
 		{
 			var response = await _mediator.Send(command);
-			return Ok(response);
+			return Ok(ApiResponse<CreateRoleResponse>.Success(response));
 		}
 
 		[HttpGet]
@@ -35,15 +36,16 @@ namespace InternSotatek.Personal.Api.Controllers
         public async Task<IActionResult> GetAllRoles([FromQuery] GetRolesListQuery query)
 		{
             var response = await _mediator.Send(query);
-			return Ok(response);
+			return Ok(ApiResponse<GetRolesListResponse>.Success(response));
 		}
+
 		[HttpPut("{id}")]
         [SwaggerOperation(Summary = "Update role")]
         public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleCommand command, [FromRoute] Guid id)
 		{
 			command.Id = id;
             var response = await _mediator.Send(command);
-            return Ok(response);
+            return Ok(ApiResponse<UpdateRoleResponse>.Success(response));
         }
 
 		[HttpDelete("{id}")]
@@ -52,7 +54,7 @@ namespace InternSotatek.Personal.Api.Controllers
 		{
 			var command = new DeleteRoleCommand { Id = id };
 			var response = await _mediator.Send(command);
-			return Ok(response);
+			return Ok(ApiResponse<DeleteRoleResponse>.Success(response));
 		}
     }
 }

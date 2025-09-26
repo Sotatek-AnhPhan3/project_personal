@@ -8,7 +8,5 @@ namespace InternSotatek.Personal.Application.Usecases.Users.Commands.Delete
 {
     public class DeleteUserResponse
     {
-        public int Code { get; set; }
-        public string Message { get; set; }
     }
 }

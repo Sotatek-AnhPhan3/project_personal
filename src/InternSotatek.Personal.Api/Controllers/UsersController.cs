@@ -8,6 +8,9 @@ using InternSotatek.Personal.Application.Usecases.Users.Commands.Create;
 using InternSotatek.Personal.Application.Usecases.Users.Commands.Update;
 using InternSotatek.Personal.Application.Usecases.Users.Queries.GetUsersList;
 using Swashbuckle.AspNetCore.Annotations;
+using InternSotatek.Personal.Application.Common.Dtos;
+using InternSotatek.Personal.Application.Usecases.Roles.Commands.UpdateRole;
+using InternSotatek.Personal.Application.Usecases.UserRoles.Queries.GetAllRoleByUserId;
 
 namespace InternSotatek.Personal.Api.Controllers
 {
@@ -25,16 +28,16 @@ namespace InternSotatek.Personal.Api.Controllers
         [SwaggerOperation(Summary = "Create new user")]
         public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
 		{
-			var reponse = await _mediator.Send(command);
-			return Ok(reponse);
+			var response = await _mediator.Send(command);
+			return Ok(ApiResponse<CreateUserResponse>.Success(response));
 		}
 
 		[HttpGet]
         [SwaggerOperation(Summary = "Get all users")]
         public async Task<IActionResult> GetAllUsers([FromQuery] GetUsersListQuery query)
 		{
-			var reponse = await _mediator.Send(query);
-			return Ok(reponse);
+			var response = await _mediator.Send(query);
+			return Ok(ApiResponse<GetUsersListResponse>.Success(response));
 		}
 
 		[HttpGet("{id}")]
@@ -42,8 +45,8 @@ namespace InternSotatek.Personal.Api.Controllers
         public async Task<IActionResult> GetUserById([FromRoute] Guid id)
 		{
 			var query = new GetUserByIdQuery { Id = id };
-			var reponse = await _mediator.Send(query);
-			return Ok(reponse);
+			var response = await _mediator.Send(query);
+			return Ok(ApiResponse<GetUserByIdResponse>.Success(response));
 		}
 
 		[HttpPut("{id}")]
@@ -51,8 +54,8 @@ namespace InternSotatek.Personal.Api.Controllers
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command, [FromRoute] Guid id)
 		{
 			command.Id = id;
-			var reponse = await _mediator.Send(command);
-			return Ok(reponse);
+			var response = await _mediator.Send(command);
+			return Ok(ApiResponse<UpdateUserResponse>.Success(response));
 		}
 
 		[HttpDelete("{id}")]
@@ -60,8 +63,8 @@ namespace InternSotatek.Personal.Api.Controllers
         public async Task<IActionResult> DeleteUser([FromRoute] Guid id)
 		{
 			var query = new DeleteUserCommand { Id = id };
-			var reponse = await _mediator.Send(query);
-			return Ok(reponse);
+			var response = await _mediator.Send(query);
+			return Ok(ApiResponse<DeleteUserResponse>.Success(response));
 		}
 
 		[HttpPatch("{id}")]
@@ -70,8 +73,8 @@ namespace InternSotatek.Personal.Api.Controllers
         public async Task<IActionResult> SoftDeleteUser([FromRoute] Guid id)
 		{
 			var query = new SoftDeleteUserCommand { Id = id };
-			var reponse = await _mediator.Send(query);
-			return Ok(reponse);
+			var response = await _mediator.Send(query);
+			return Ok(ApiResponse<SoftDeleteUserResponse>.Success(response));
 		}
 	}
 }

@@ -23,12 +23,16 @@ public class UpdateRoleCommandHandler : IRequestHandler<UpdateRoleCommand, Updat
     {
         var existingUser = await RoleExist(request, cancellationToken);
 
-        await UpdateRole(existingUser, request, cancellationToken);
+        var newRoleUpdate = await UpdateRole(existingUser, request, cancellationToken);
 
         return new UpdateRoleResponse
         {
-            Code = 200,
-            Message = "Update successfull"
+           Id = newRoleUpdate.Id,
+           Name = newRoleUpdate.Name,
+           Description = newRoleUpdate.Description,
+           Slug = newRoleUpdate.Slug,
+           CreatedTime = newRoleUpdate.CreatedTime,
+           UpdatedTime = newRoleUpdate.UpdatedTime,
         };
     }
 
@@ -50,7 +54,7 @@ public class UpdateRoleCommandHandler : IRequestHandler<UpdateRoleCommand, Updat
         return existingNameRole;
     }
 
-    private async Task UpdateRole(Role role, UpdateRoleCommand request, CancellationToken cancellationToken)
+    private async Task<Role> UpdateRole(Role role, UpdateRoleCommand request, CancellationToken cancellationToken)
     {
         role.Name = request.Name;
         role.Description = request.Description;
@@ -58,5 +62,7 @@ public class UpdateRoleCommandHandler : IRequestHandler<UpdateRoleCommand, Updat
         role.UpdatedTime = DateTime.UtcNow;
 
         await _roleRepository.UpdateAsync(role, cancellationToken);
+
+        return role;
     }
 }

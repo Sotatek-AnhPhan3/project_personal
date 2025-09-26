@@ -37,8 +37,11 @@ public class CreateRoleCommandHandler : IRequestHandler<CreateRoleCommand, Creat
 
         return new CreateRoleResponse
         {
-            Code = 200,
-            Message = "Success"
+            Id = newRole.Id,
+            Name = newRole.Name,
+            Description = newRole.Description,
+            Slug = newRole.Slug,
+            CreatedTime = newRole.CreatedTime,
         };
     }
 }

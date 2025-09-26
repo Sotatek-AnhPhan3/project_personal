@@ -39,7 +39,10 @@ public class CreateUserRoleCommandHandler : IRequestHandler<CreateUserRoleComman
             await CreateUserRoleFisrt(command, userName, cancellationToken);
         }
         
-        return new CreateUserRoleResponse { Code = 200, Message = "Success" };
+        return new CreateUserRoleResponse { 
+            UserId = command.UserId,
+            RoleIds = command.RoleIds,
+        };
     }
 
     private async Task<string> GetUsername(Guid userId, CancellationToken cancellationToken)

@@ -27,12 +27,20 @@ namespace InternSotatek.Personal.Application.Usecases.Users.Commands.Update
         {
             var existingUser = await UserExist(request,cancellationToken);
 
-            await UpdateUser(existingUser, request, cancellationToken);
+            var newUserUpdate = await UpdateUser(existingUser, request, cancellationToken);
 
             return new UpdateUserResponse
             {
-                Code = 200,
-                Message = "Update successfull"
+                Id = newUserUpdate.Id,
+                Username = newUserUpdate.Username,
+                Firstname = newUserUpdate.Firstname,
+                Lastname = newUserUpdate.Lastname,
+                Email = newUserUpdate.Email,
+                PhoneNumber = newUserUpdate.PhoneNumber,
+                IsActive= newUserUpdate.IsActive,
+                Dob = newUserUpdate.Dob,
+                CreatedTime = newUserUpdate.CreatedTime,
+                UpdatedTime = newUserUpdate.UpdatedTime,
             };
         }
 
@@ -54,7 +62,7 @@ namespace InternSotatek.Personal.Application.Usecases.Users.Commands.Update
             return existingUser;
         }
 
-        private async Task UpdateUser(User user, UpdateUserCommand request, CancellationToken cancellationToken) {
+        private async Task<User> UpdateUser(User user, UpdateUserCommand request, CancellationToken cancellationToken) {
             user.Username = request.Username;
             user.Firstname = request.Firstname;
             user.Lastname = request.Lastname;
@@ -64,6 +72,8 @@ namespace InternSotatek.Personal.Application.Usecases.Users.Commands.Update
             user.UpdatedTime = DateTime.UtcNow;
 
             await _userRepository.UpdateAsync(user, cancellationToken);
+
+            return user;
         }
 
     }

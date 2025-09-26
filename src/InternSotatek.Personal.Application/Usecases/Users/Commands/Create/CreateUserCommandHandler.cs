@@ -53,7 +53,19 @@ namespace InternSotatek.Personal.Application.Usecases.Users.Commands.Create
 
             await _userRepository.AddAsync(newUser, cancellationToken);
 
-            return new CreateUserResponse { Code = 200 };
+            return new CreateUserResponse { 
+                Id = newUser.Id,
+                Username = newUser.Username,
+                PasswordHashed = newUser.PasswordHashed,
+                Firstname = newUser.Firstname,
+                Lastname = newUser.Lastname,
+                IsActive = newUser.IsActive,
+                Email = newUser.Email,
+                PhoneNumber = newUser.PhoneNumber,
+                Dob = newUser.Dob,
+                CreatedTime = newUser.CreatedTime,
+                UpdatedTime = newUser.UpdatedTime
+            };
         }
 
         private string HashPassword(string password)

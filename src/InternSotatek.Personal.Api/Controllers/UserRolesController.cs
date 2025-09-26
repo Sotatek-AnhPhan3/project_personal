@@ -1,4 +1,5 @@
-﻿using InternSotatek.Personal.Application.Usecases.UserRoles.Commands.Create;
+﻿using InternSotatek.Personal.Application.Common.Dtos;
+using InternSotatek.Personal.Application.Usecases.UserRoles.Commands.Create;
 using InternSotatek.Personal.Application.Usecases.UserRoles.Queries.GetAllRoleByUserId;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -21,7 +22,7 @@ namespace InternSotatek.Personal.Api.Controllers
         public async Task<IActionResult> CreateUserRoles(CreateUserRoleCommand command)
         {
             var response = await _mediator.Send(command);
-            return Ok(response);
+            return Ok(ApiResponse<CreateUserRoleResponse>.Success(response));
         }
 
         [HttpGet("{id}")]
@@ -31,7 +32,7 @@ namespace InternSotatek.Personal.Api.Controllers
             var query = new GetAllRoleByUserIdQuery { UserId = id };
             var response = await _mediator.Send(query);
 
-            return Ok(response);
+            return Ok(ApiResponse<GetAllRoleByUserIdResponse>.Success(response));
         }
     }
 }

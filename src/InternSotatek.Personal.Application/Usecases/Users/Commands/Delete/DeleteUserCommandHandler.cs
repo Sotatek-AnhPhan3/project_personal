@@ -24,13 +24,9 @@ namespace InternSotatek.Personal.Application.Usecases.Users.Commands.Delete
         public async Task<DeleteUserResponse> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
             await _userRepository.DeleteByIdAsync(request.Id);
-            return new DeleteUserResponse
-            {
-                Code = 200,
-                Message = "OK",
-            };
+            return new DeleteUserResponse { };
         }
 
-        
+
     }
 }

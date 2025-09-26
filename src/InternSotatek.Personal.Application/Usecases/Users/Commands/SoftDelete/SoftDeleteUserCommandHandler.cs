@@ -27,11 +27,7 @@ public class SoftDeleteUserCommandHandler : IRequestHandler<SoftDeleteUserComman
 
         await SoftDelete(existingUser, cancellationToken);
 
-        return new SoftDeleteUserResponse
-        {
-            Code = 200,
-            Message = "Ok"
-        };
+        return new SoftDeleteUserResponse { };
     }
 
     private async Task<User> UserExist(Guid id, CancellationToken cancellationToken)

@@ -8,6 +8,5 @@ namespace InternSotatek.Personal.Application.Usecases.Roles.Commands.DeleteRole;
 
 public class DeleteRoleResponse
 {
-    public int Code {  get; set; }
-    public string Message { get; set; }
+
 }

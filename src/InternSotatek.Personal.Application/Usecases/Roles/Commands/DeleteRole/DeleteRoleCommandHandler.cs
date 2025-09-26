@@ -21,6 +21,6 @@ public class DeleteRoleCommandHandler : IRequestHandler<DeleteRoleCommand, Delet
     public async Task<DeleteRoleResponse> Handle(DeleteRoleCommand command, CancellationToken cancellation)
     {
         await _roleRepository.DeleteByIdAsync(command.Id, cancellation);
-        return new DeleteRoleResponse { Code = 200, Message = "Success" };
+        return new DeleteRoleResponse {};
     }
 }
